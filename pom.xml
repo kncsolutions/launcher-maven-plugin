@@ -1,0 +1,185 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>in.kncsolutions.dhelm.launcher</groupId>
+  <artifactId>launcher-maven-plugin</artifactId>
+  <packaging>maven-plugin</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <description>
+    The launcher-maven-plugin can be used to generate the .desktop file for your executable java application in 
+    Ubuntu.
+  </description>
+  <name>launcher-maven-plugin</name>
+  <url>https://dhelm.kncsolutions.in</url>
+  
+   <licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+   
+   <organization>
+     <name>KNC Solutions Private Limited. </name>
+  </organization>
+   
+	
+	<developers>
+    <developer>
+      <name>Pallav Nandi Chaudhuri</name>
+      <email>developer@kncsolutions.in</email>
+      <organization>KNC Solutions Private Limited</organization>
+      <organizationUrl>https://www.dhelm.kncsolutions.in</organizationUrl>
+    </developer>
+  </developers>
+  
+  <scm>
+    <connection>scm:git:https://github.com/kncsolutions/dhelm.git</connection>
+    <developerConnection>scm:git:https://github.com/kncsolutions/dhelm.git</developerConnection>
+     <url>https://github.com/kncsolutions/dhelm</url>
+  </scm>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>     
+  </properties>
+  
+  <distributionManagement>
+  <snapshotRepository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  </snapshotRepository>
+ <repository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+  </repository> 
+ </distributionManagement>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+     <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <version>3.4</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+     <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+              <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+     <plugin>
+       <groupId>org.sonatype.plugins</groupId>
+       <artifactId>nexus-staging-maven-plugin</artifactId>
+       <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+         <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+           <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+     </plugin>	
+     <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-javadoc-plugin</artifactId>
+    <version>3.0.0</version>
+    <executions>
+        <execution>
+            <id>attach-javadocs</id>
+            <goals>
+                <goal>jar</goal>
+            </goals>
+            <configuration> <!-- add this to disable checking -->
+            <tags>
+            <tag>
+              <name>goal</name>              
+              <placement>X</placement>             
+            </tag>
+             <tag>
+              <name>phase</name>              
+              <placement>X</placement>             
+            </tag>
+          </tags>  
+            </configuration>
+        </execution>
+    </executions>
+    </plugin>
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-site-plugin</artifactId>
+            <version>3.3</version>
+                    <executions>
+          <execution>
+            <id>attach-descriptor</id>
+            <goals>
+              <goal>attach-descriptor</goal>
+            </goals>
+          </execution>
+        </executions>
+			<configuration>  
+			       
+              <aggregate>true</aggregate>       
+             </configuration>
+        </plugin>
+       <!--  <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>2.7</version>
+        </plugin> -->
+     <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-compiler-plugin</artifactId>
+       <version>3.0</version>
+          <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          </configuration>
+     </plugin>
+     </plugins>
+     </build> 
+     
+      <reporting>
+      <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration> 
+           <tags>
+            <tag>
+              <name>goal</name>              
+              <placement>X</placement>             
+            </tag>
+             <tag>
+              <name>phase</name>              
+              <placement>X</placement>             
+            </tag>
+          </tags>     
+           <aggregate>true</aggregate>       
+        </configuration>
+      </plugin>
+      </plugins>    
+   </reporting>      
+</project>
