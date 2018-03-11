@@ -4,7 +4,7 @@
   <groupId>in.kncsolutions.dhelm.launcher</groupId>
   <artifactId>launcher-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <description>
     The launcher-maven-plugin can be used to generate the .desktop file for your executable java application in 
     Ubuntu.

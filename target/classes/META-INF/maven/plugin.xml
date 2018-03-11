@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <name>launcher-maven-plugin</name>
+  <description>The launcher-maven-plugin can be used to generate the .desktop file for your executable java application in 
+    Ubuntu.</description>
+  <groupId>in.kncsolutions.dhelm.launcher</groupId>
+  <artifactId>launcher-maven-plugin</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <goalPrefix>launcher</goalPrefix>
+  <isolatedRealm>false</isolatedRealm>
+  <inheritedByDefault>true</inheritedByDefault>
+  <mojos>
+    <mojo>
+      <goal>gen</goal>
+      <description>Goal which creates Desktop launcher for Ubuntu.</description>
+      <requiresDirectInvocation>false</requiresDirectInvocation>
+      <requiresProject>true</requiresProject>
+      <requiresReports>false</requiresReports>
+      <aggregator>false</aggregator>
+      <requiresOnline>false</requiresOnline>
+      <inheritedByDefault>true</inheritedByDefault>
+      <phase>package</phase>
+      <implementation>in.kncsolutions.dhelm.launcher.LauncherCreator</implementation>
+      <language>java</language>
+      <instantiationStrategy>per-lookup</instantiationStrategy>
+      <executionStrategy>once-per-session</executionStrategy>
+      <threadSafe>false</threadSafe>
+      <parameters>
+        <parameter>
+          <name>appName</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Name of the Application.</description>
+        </parameter>
+        <parameter>
+          <name>comment</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Comments if any.</description>
+        </parameter>
+        <parameter>
+          <name>executableFile</name>
+          <type>java.lang.String</type>
+          <required>true</required>
+          <editable>true</editable>
+          <description>Executable.</description>
+        </parameter>
+        <parameter>
+          <name>fileName</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Name of the .desktop file.</description>
+        </parameter>
+        <parameter>
+          <name>genericName</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Generic name of the Application.</description>
+        </parameter>
+        <parameter>
+          <name>iconPath</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Path for the icon with .png extension.The file should reside in the same directory where the bin folder with shell
+script to run the application resides. The filepath should be relative to the base directory of the final application package.</description>
+        </parameter>
+        <parameter>
+          <name>outputDirectory</name>
+          <type>java.lang.String</type>
+          <required>true</required>
+          <editable>true</editable>
+          <description>Location of the file.</description>
+        </parameter>
+        <parameter>
+          <name>terminalStatus</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Visual status for terminal window .</description>
+        </parameter>
+        <parameter>
+          <name>version</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Version of the Application.</description>
+        </parameter>
+      </parameters>
+      <configuration>
+        <appName implementation="java.lang.String" default-value="myApp">${appName}</appName>
+        <comment implementation="java.lang.String" default-value="">${comment}</comment>
+        <executableFile implementation="java.lang.String">${executableFile}</executableFile>
+        <fileName implementation="java.lang.String" default-value="desktopIni">${fileName}</fileName>
+        <genericName implementation="java.lang.String" default-value="">${genericName}</genericName>
+        <iconPath implementation="java.lang.String" default-value="">${iconPath}</iconPath>
+        <outputDirectory implementation="java.lang.String">${outputDirectory}</outputDirectory>
+        <terminalStatus implementation="java.lang.String" default-value="false">${terminalStatus}</terminalStatus>
+        <version implementation="java.lang.String" default-value="">${version}</version>
+      </configuration>
+    </mojo>
+  </mojos>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <type>jar</type>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-model</artifactId>
+      <type>jar</type>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <type>jar</type>
+      <version>2.0.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-artifact</artifactId>
+      <type>jar</type>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.sisu</groupId>
+      <artifactId>sisu-inject-plexus</artifactId>
+      <type>jar</type>
+      <version>1.4.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-component-annotations</artifactId>
+      <type>jar</type>
+      <version>1.5.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-classworlds</artifactId>
+      <type>jar</type>
+      <version>2.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.sisu</groupId>
+      <artifactId>sisu-inject-bean</artifactId>
+      <type>jar</type>
+      <version>1.4.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.sisu</groupId>
+      <artifactId>sisu-guice</artifactId>
+      <type>jar</type>
+      <version>2.1.7</version>
+    </dependency>
+  </dependencies>
+</plugin>
